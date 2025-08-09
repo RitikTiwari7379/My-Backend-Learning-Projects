@@ -20,12 +20,13 @@ This repository documents my journey into backend development using the Node.js 
 The repository is organized into separate directories for each project. Each project contains its own backend server and a corresponding frontend.
 
 /My-Backend-Learning-Projects:
-├── 📝 project1-Todo-App/
-│   ├── 🚀 Todo-Backend/
-│   └── 💻 Todo-Frontend/
-├── 📖 project2-Blog-App/
-│   ├── 🚀 Blog-Backend/
-│   └── 💻 Blog-Frontend/
+
+├── 📝 project1-Todo-App
+│   ├── 🚀 Todo-Backend
+│   └── 💻 Todo-Frontend
+├── 📖 project2-Blog-App
+│   ├── 🚀 Blog-Backend
+│   └── 💻 Blog-Frontend
 └── 📄 README.md
 
 ---
