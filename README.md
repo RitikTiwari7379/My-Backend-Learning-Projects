@@ -27,12 +27,9 @@ The repository is organized into separate directories for each project. Each pro
 │   ├── 🚀 Blog-Backend/
 │   └── 💻 Blog-Frontend/
 └── 📄 README.md
-
-
-
-
 ---
 
+---
 ## 📝 Project 1: Todo List API
 
 A foundational project focusing on the core principles of RESTful APIs and **CRUD** (Create, Read, Update, Delete) operations. This API allows a client to manage a list of tasks.
@@ -68,9 +65,9 @@ This project is an evolution from the Todo app. It introduces the concept of **d
     ```sh
     npm install
     ```
-3.  Start the server:
+3.  Start the server (with nodemon for auto-reloading):
     ```sh
-   npm start (change script in app.json -> ("start" : "nodemon app.js")
+    npm start (change script in app.json -> ("start" : "nodemon app.js")
     ```
 
 ---
