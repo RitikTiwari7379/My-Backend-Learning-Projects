@@ -19,34 +19,40 @@ This repository documents my journey into backend development using the Node.js 
 
 The repository is organized into separate directories for each project. Each project contains its own backend server and a corresponding frontend.
 
-/My-Backend-Learning-Projects/
-├── 📝 project1-Todo-App/
-│   ├── 🔧 Todo-Backend/          # Express.js/Node.js backend
-│   └── 🎨 Todo-Frontend/         # React frontend
-├── 📰 project2-Blog-App/
-│   ├── 🔧 Blog-Backend/          # Express.js/Node.js backend
-│   └── 🎨 Blog-Frontend/         # React frontend
+```
+📁 My-Backend-Learning-Projects/
+├── 📁 project1-Todo-App/
+│   ├── 📁 Todo-Backend/          (Express.js/Node.js backend)
+│   └── 📁 Todo-Frontend/         (React frontend)
+├── 📁 project2-Blog-App/
+│   ├── 📁 Blog-Backend/          (Express.js/Node.js backend)
+│   └── 📁 Blog-Frontend/         (React frontend)
 └── 📄 README.md
+```
 
 ---
+
 ## 📝 Project 1: Todo List API
 
 A foundational project focusing on the core principles of RESTful APIs and **CRUD** (Create, Read, Update, Delete) operations. This API allows a client to manage a list of tasks.
 
 ### How to Run
 
-1.  Navigate to the backend directory:
-    ```sh
-    cd project1-Todo-App/Todo-Backend
-    ```
-2.  Install the required dependencies:
-    ```sh
-    npm install
-    ```
-3.  Start the server (with nodemon for auto-reloading):
-    ```sh
-    npm start (change script in app.json -> ("start" : "nodemon app.js")
-    ```
+1. Navigate to the backend directory:
+   ```sh
+   cd project1-Todo-App/Todo-Backend
+   ```
+
+2. Install the required dependencies:
+   ```sh
+   npm install
+   ```
+
+3. Start the server (with nodemon for auto-reloading):
+   ```sh
+   npm start
+   ```
+   > **Note:** Change script in package.json → `"start": "nodemon app.js"`
 
 ---
 
@@ -56,34 +62,38 @@ This project is an evolution from the Todo app. It introduces the concept of **d
 
 ### How to Run
 
-1.  Navigate to the backend directory:
-    ```sh
-    cd project2-Blog-App/Blog-Backend
-    ```
-2.  Install the required dependencies:
-    ```sh
-    npm install
-    ```
-3.  Start the server (with nodemon for auto-reloading):
-    ```sh
-    npm start (change script in app.json -> ("start" : "nodemon app.js")
-    ```
+1. Navigate to the backend directory:
+   ```sh
+   cd project2-Blog-App/Blog-Backend
+   ```
+
+2. Install the required dependencies:
+   ```sh
+   npm install
+   ```
+
+3. Start the server (with nodemon for auto-reloading):
+   ```sh
+   npm start
+   ```
+   > **Note:** Change script in package.json → `"start": "nodemon app.js"`
 
 ---
 
 ## 🎯 Learning Outcomes
 
 Through these projects, I have gained hands-on experience with:
--   Building RESTful APIs from scratch using Express.js.
--   Designing and using MongoDB schemas with Mongoose.
--   Implementing all four CRUD operations against a database.
--   Understanding and modeling one-to-many data relationships (Users and Posts).
--   Structuring a Node.js application with routers and controllers.
+
+- Building RESTful APIs from scratch using Express.js
+- Designing and using MongoDB schemas with Mongoose
+- Implementing all four CRUD operations against a database
+- Understanding and modeling one-to-many data relationships (Users and Posts)
+- Structuring a Node.js application with routers and controllers
 
 ## 🌱 Future Improvements
 
--   [ ] Implement robust user authentication and authorization using JSON Web Tokens (JWT).
--   [ ] Add comprehensive input validation and error handling middleware.
--   [ ] Introduce a "Comments" feature to the Blog API to model many-to-many relationships.
--   [ ] Add pagination to GET routes that return lists of data.
--   [ ] Write unit and integration tests for the APIs.
+- [ ] Implement robust user authentication and authorization using JSON Web Tokens (JWT)
+- [ ] Add comprehensive input validation and error handling middleware
+- [ ] Introduce a "Comments" feature to the Blog API to model many-to-many relationships
+- [ ] Add pagination to GET routes that return lists of data
+- [ ] Write unit and integration tests for the APIs
