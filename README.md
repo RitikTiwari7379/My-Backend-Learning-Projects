@@ -17,19 +17,18 @@ This repository documents my journey into backend development using the Node.js 
 
 ## 📂 Repository Structure
 
-The repository is organized into separate directories for each project. Each project contains its own backend server.
+The repository is organized into separate directories for each project. Each project contains its own backend server and a corresponding frontend.
 
 /My-Backend-Learning-Projects
-|
-|-- project1-Todo-App/
-|   |-- Todo-Backend/      
-|   |-- Todo-Frontend/     
-|
-|-- project2-Blog-App/
-|   |-- Blog-Backend/     
-|   |-- Blog-Frontend/   
-|
-|-- README.md
+├── 📝 project1-Todo-App/
+│   ├── 🚀 Todo-Backend/
+│   └── 💻 Todo-Frontend/
+├── 📖 project2-Blog-App/
+│   ├── 🚀 Blog-Backend/
+│   └── 💻 Blog-Frontend/
+└── 📄 README.md
+
+
 
 
 ---
@@ -50,7 +49,7 @@ A foundational project focusing on the core principles of RESTful APIs and **CRU
     ```
 3.  Start the server (with nodemon for auto-reloading):
     ```sh
-    npm run dev
+    npm start (change script in app.json -> ("start" : "nodemon app.js")
     ```
 
 ---
@@ -71,7 +70,7 @@ This project is an evolution from the Todo app. It introduces the concept of **d
     ```
 3.  Start the server:
     ```sh
-    npm run dev
+   npm start (change script in app.json -> ("start" : "nodemon app.js")
     ```
 
 ---
