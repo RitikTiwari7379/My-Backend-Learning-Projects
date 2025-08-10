@@ -1,82 +1,65 @@
-import { useReducer } from "react";
-import { createContext } from "react";
+import { useReducer, useEffect, createContext } from "react";
+import { getfromserver, deleteElementinserver, addtoserver } from "../services/blogservices";
 
 export const PostList = createContext({
   postList: [],
+  fetchPosts: () => {},
   addPost: () => {},
   deletePost: () => {},
 });
 
-const postListReducer = (currPostList, action) => {
-  let newPostList = currPostList;
-  if (action.type === "DELETE_POST") {
-    newPostList = currPostList.filter(
-      (post) => post.id !== action.payload.postId
-    );
+const postListReducer = (state, action) => {
+  switch (action.type) {
+    case "SET_POSTS":
+      return action.payload;
+    case "ADD_POST":
+      return [action.payload, ...state];
+    case "DELETE_POST":
+      return state.filter((post) => post._id !== action.payload);
+    default:
+      return state;
   }
-  else if (action.type === "ADD_POST") {
-    newPostList = [action.payload, ...currPostList]
-  }
-  return newPostList;
 };
 
 const PostListProvider = ({ children }) => {
-  const [postList, dispatchPostList] = useReducer(
-    postListReducer,
-    DEFAULT_POST_LIST
-  );
+  const [postList, dispatch] = useReducer(postListReducer, []);
 
-  const addPost = (userId, postTitle, postBody, reactions, tags) => {
-    dispatchPostList({
-      type: "ADD_POST",
-      payload: {
-        id: Date.now(),
-        title: postTitle,
-        body: postBody,
-        reactions: reactions,
-        userId: userId,
-        tags: tags,
-      },
-    });
+  const fetchPosts = async () => {
+    try {
+      const posts = await getfromserver();
+      dispatch({ type: "SET_POSTS", payload: posts });
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
   };
 
-  const deletePost = (postId) => {
-    dispatchPostList({
-      type: "DELETE_POST",
-      payload: {
-        postId,
-      },
-    });
+  const addPost = async (_id, title, body, reactions, userId, tags) => {
+    try {
+      const newPost = await addtoserver(_id, title, body, reactions, userId, tags);
+      dispatch({ type: "ADD_POST", payload: newPost });
+    } catch (error) {
+      console.error("Error adding post:", error);
+    }
   };
+
+  const deletePost = async (postId) => {
+    try {
+      await deleteElementinserver(postId);
+      dispatch({ type: "DELETE_POST", payload: postId });
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
   return (
-    <PostList.Provider
-      value={{
-        postList,
-        addPost,
-        deletePost,
-      }}
-    >
+    <PostList.Provider value={{ postList, fetchPosts, addPost, deletePost }}>
       {children}
     </PostList.Provider>
   );
 };
 
-const DEFAULT_POST_LIST = [
-  {
-    id: "1",
-    title: "Going to Mumbai",
-    body: "Hi Friends, I am going to Mumbai for my vacations. Hope to enjoy a lot. Peace out",
-    reactions: 2,
-    userId: "user-9",
-    tags: ["vacation", "Mumbai", "Enjoying"],
-  },
-  {
-    id: "2",
-    title: "Pass hogaya Bhai",
-    body: "4 saal ki masti ke baad bhi ho gaye hai pass. Hard to believe.",
-    reactions: 15,
-    userId: "user-12",
-    tags: ["Graduating", "Unbelievable"],
-  },
-];
 export default PostListProvider;

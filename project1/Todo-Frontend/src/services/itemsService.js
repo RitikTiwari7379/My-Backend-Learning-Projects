@@ -36,7 +36,7 @@ export const deleteItemFromServer = async (id) => {
 };
 
 const mapServerItemToLocalItem = (serverItem) => {
-  return {
+  return{
     id: serverItem._id,
     name: serverItem.task,
     dueDate: serverItem.date,

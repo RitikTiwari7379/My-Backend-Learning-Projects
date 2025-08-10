@@ -51,7 +51,6 @@ function App() {
       return item;
     });
 
-    // Update state
     setTodoItems(updatedItems);
   };
 

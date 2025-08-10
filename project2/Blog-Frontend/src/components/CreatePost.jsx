@@ -1,43 +1,64 @@
-import { useContext } from "react";
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import { PostList } from "../store/post-list-store";
 
 const CreatePost = () => {
-
-  const {addPost} = useContext(PostList);
-
+  const { addPost } = useContext(PostList);
+  // Create refs for all fields including an id field
+  const idElement = useRef();
   const userIdElement = useRef();
   const postTitleElement = useRef();
   const postBodyElement = useRef();
   const reactionsElement = useRef();
   const tagsElement = useRef();
-  
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    // Get values from the form
+    const _id = idElement.current.value;
     const userId = userIdElement.current.value;
     const postTitle = postTitleElement.current.value;
     const postBody = postBodyElement.current.value;
-    const reactions = reactionsElement.current.value;
-    const tags = tagsElement.current.value.split(' ');
+    const reactions = Number(reactionsElement.current.value);
+    const tags = tagsElement.current.value.split(" ").filter((t) => t.trim());
 
+    // Reset the fields
+    idElement.current.value = "";
     userIdElement.current.value = "";
     postTitleElement.current.value = "";
     postBodyElement.current.value = "";
     reactionsElement.current.value = "";
     tagsElement.current.value = "";
 
-    addPost(userId, postTitle, postBody, reactions, tags);
-  }
+    // Call the provider's addPost function to update both the server and UI state.
+    try {
+      await addPost(_id, postTitle, postBody, reactions, userId, tags);
+      console.log("Post successfully added");
+    } catch (error) {
+      console.error("Error while adding post", error);
+    }
+  };
 
   return (
     <form className="create-post" onSubmit={handleSubmit}>
+      <div className="mb-3">
+        <label htmlFor="id" className="form-label">
+          Enter your Post Id here
+        </label>
+        <input
+          type="text"
+          ref={idElement}
+          className="form-control"
+          id="id"
+          placeholder="Your Post Id"
+        />
+      </div>
       <div className="mb-3">
         <label htmlFor="userId" className="form-label">
           Enter your UserId here
         </label>
         <input
           type="text"
-          ref = {userIdElement}
+          ref={userIdElement}
           className="form-control"
           id="userId"
           placeholder="Your User Id"
@@ -49,7 +70,7 @@ const CreatePost = () => {
         </label>
         <input
           type="text"
-          ref = {postTitleElement}
+          ref={postTitleElement}
           className="form-control"
           id="title"
           placeholder="How are you feeling today..."
@@ -61,20 +82,19 @@ const CreatePost = () => {
         </label>
         <textarea
           rows="4"
-          type="text"
-          ref = {postBodyElement}
+          ref={postBodyElement}
           className="form-control"
           id="body"
-          placeholder="Tell us more about it. "
+          placeholder="Tell us more about it."
         />
       </div>
       <div className="mb-3">
         <label htmlFor="reactions" className="form-label">
-          Numbers of reactions
+          Number of reactions
         </label>
         <input
           type="text"
-          ref = {reactionsElement}
+          ref={reactionsElement}
           className="form-control"
           id="reactions"
           placeholder="How many people reacted to this post"
@@ -86,17 +106,18 @@ const CreatePost = () => {
         </label>
         <input
           type="text"
-          ref = {tagsElement}
+          ref={tagsElement}
           className="form-control"
           id="tags"
           placeholder="Please enter tags using space"
         />
       </div>
-      
+
       <button type="submit" className="btn btn-primary">
         Post
       </button>
     </form>
   );
 };
+
 export default CreatePost;
